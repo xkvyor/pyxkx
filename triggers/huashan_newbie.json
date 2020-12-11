@@ -1,79 +1,219 @@
 [
     {
+        "and": [
+            {
+                "name": "hs-job",
+                "op": "not",
+                "value": "ning"
+            },
+            {
+                "name": "hs-job",
+                "op": "not",
+                "value": "ybq"
+            }
+        ],
         "cd": 10000,
         "out": "ask yue about job"
     },
     {
+        "and": [
+            {
+                "name": "hs-job",
+                "op": "not",
+                "value": "yls"
+            },
+            {
+                "name": "hs-job",
+                "op": "not",
+                "value": "ybq"
+            }
+        ],
+        "cd": 10000,
+        "out": "ask ning about job"
+    },
+    {
         "match": "岳灵珊对你说道：最近华山颇不安宁，你带着这块令牌去巡逻一下吧。",
-        "out": "n"
+        "out": "n",
+        "set": [
+            {
+                "name": "hs-last",
+                "value": "n"
+            },
+            {
+                "name": "hs-job",
+                "value": "yls"
+            }
+        ]
     },
     {
         "match": "你在练武场巡弋",
-        "out": "n"
+        "out": "n",
+        "set": [
+            {
+                "name": "hs-last",
+                "value": "n"
+            }
+        ]
     },
     {
         "match": "你在玉女峰巡弋",
-        "out": "e"
+        "out": "e",
+        "set": [
+            {
+                "name": "hs-last",
+                "value": "e"
+            }
+        ]
     },
     {
         "match": "你在玉女祠巡弋",
-        "out": "sd"
+        "out": "sd",
+        "set": [
+            {
+                "name": "hs-last",
+                "value": "sd"
+            }
+        ]
     },
     {
         "match": "你在后山小路巡弋",
-        "out": "sd"
+        "out": "sd",
+        "set": [
+            {
+                "name": "hs-last",
+                "value": "sd"
+            }
+        ]
     },
     {
         "match": "你在小院巡弋",
-        "out": "nu;nu;nu;w;nd"
+        "out": "nu;nu;nu;w;nd",
+        "set": [
+            {
+                "name": "hs-last",
+                "value": "nu;nu;nu;w;nd"
+            }
+        ]
     },
     {
         "match": "你在镇岳宫巡弋",
-        "out": "eu"
+        "out": "eu",
+        "set": [
+            {
+                "name": "hs-last",
+                "value": "eu"
+            }
+        ]
     },
     {
         "match": "你在朝阳峰巡弋",
-        "out": "wd;nu"
+        "out": "wd;nu",
+        "set": [
+            {
+                "name": "hs-last",
+                "value": "wd;nu"
+            }
+        ]
     },
     {
         "match": "你在苍龙岭巡弋",
-        "out": "wu"
+        "out": "wu",
+        "set": [
+            {
+                "name": "hs-last",
+                "value": "wu"
+            }
+        ]
     },
     {
         "match": "你在舍身崖巡弋",
-        "out": "ed;nd"
+        "out": "ed;nd",
+        "set": [
+            {
+                "name": "hs-last",
+                "value": "ed;nd"
+            }
+        ]
     },
     {
         "match": "你在猢狲愁巡弋",
-        "out": "nd"
+        "out": "nd",
+        "set": [
+            {
+                "name": "hs-last",
+                "value": "nd"
+            }
+        ]
     },
     {
         "match": "你在老君沟巡弋",
-        "out": "nu"
+        "out": "nu",
+        "set": [
+            {
+                "name": "hs-last",
+                "value": "nu"
+            }
+        ]
     },
     {
         "match": "你在华山别院巡弋",
-        "out": "sd;wd"
+        "out": "sd;wd",
+        "set": [
+            {
+                "name": "hs-last",
+                "value": "sd;wd"
+            }
+        ]
     },
     {
         "match": "你在百尺峡巡弋",
-        "out": "nd"
+        "out": "nd",
+        "set": [
+            {
+                "name": "hs-last",
+                "value": "nd"
+            }
+        ]
     },
     {
         "match": "你在千尺幢巡弋",
-        "out": "wd"
+        "out": "wd",
+        "set": [
+            {
+                "name": "hs-last",
+                "value": "wd"
+            }
+        ]
     },
     {
         "match": "你在青柯坪巡弋",
-        "out": "nd"
+        "out": "nd",
+        "set": [
+            {
+                "name": "hs-last",
+                "value": "nd"
+            }
+        ]
     },
     {
         "match": "你在莎萝坪巡弋",
-        "out": "nw"
+        "out": "nw",
+        "set": [
+            {
+                "name": "hs-last",
+                "value": "nw"
+            }
+        ]
     },
     {
         "match": "你在华山脚下巡弋",
-        "out": "n"
+        "out": "n",
+        "set": [
+            {
+                "name": "hs-last",
+                "value": "n"
+            }
+        ]
     },
     {
         "match": "你在玉泉院巡弋",
@@ -81,6 +221,41 @@
     },
     {
         "match": "这么快就回来了？肯定偷懒了吧",
-        "out": "give yue ling"
+        "out": "give yue ling",
+        "delay": 5000
+    },
+    {
+        "match": "你的动作还没有完成，不能移动。",
+        "out": "{hs-last}",
+        "delay": 5000
+    },
+    {
+        "match": "你给岳灵珊一块令牌",
+        "set": [
+            {
+                "name": "hs-last",
+                "value": ""
+            }
+        ]
+    },
+    {
+        "match": "你的功夫不错了，找我娘看看有什么任务交给你",
+        "out": "s;w;w;ask ning about job",
+        "set": [
+            {
+                "name": "hs-job",
+                "value": "ning"
+            }
+        ]
+    },
+    {
+        "match": "近华山来了些新弟子，你带去练功房指点",
+        "out": "e;e;e",
+        "set": [
+            {
+                "name": "hs-job",
+                "value": "ning"
+            }
+        ]
     }
 ]

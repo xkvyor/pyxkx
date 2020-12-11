@@ -18,6 +18,7 @@ class Game:
         self.triggers = {}
         self.states = {}
         self.last = None
+        self.tasks = {}
 
     def handle_cmd(self, cmd):
         pieces = cmd.split()
@@ -42,27 +43,61 @@ class Game:
     def check_triggers(self, x):
         for a, trigger in self.triggers.items():
             for b, item in enumerate(trigger):
-                if self.is_triggered('%s@@%d' % (a, b), item, x):
+                tid = '%s@@%d' % (a, b)
+                if self.is_triggered(tid, item, x):
                     vs = {}
                     if 'match' in item:
                         p = re.compile(item['match'])
                         m = p.search(x)
                         for i, v in enumerate(m.groups()):
                             vs['$%d' % (i+1)] = v
-                    if 'out' in item:
-                        out = item['out'].format(**self.states)
-                        if out == '$$':
-                            self.write(self.last)
-                        else:
-                            for k, v in vs.items():
-                                out = out.replace(k, v)
-                            self.write(out)
-                    if 'set' in item:
-                        for d in item['set']:
-                            if isinstance(d['value'], str) and d['value'][0] == '$':
-                                self.states[d['name']] = vs.get(d['value'])
-                            else:
-                                self.states[d['name']] = d['value']
+                    self.execute(tid, vs, item)
+
+    def execute(self, key, vs, item):
+        if 'out' in item:
+            out = item['out'].format(**self.states)
+            if out == '$$':
+                out = self.last
+            else:
+                for k, v in vs.items():
+                    out = out.replace(k, v)
+            if 'delay' in item:
+                self.schedule("%s@@schedule" % key, self.now() + item['delay'], out)
+            else:
+                self.write(out)
+        if 'set' in item:
+            for d in item['set']:
+                if isinstance(d['value'], str) and d['value'][0] == '$':
+                    self.states[d['name']] = vs.get(d['value'])
+                else:
+                    self.states[d['name']] = d['value']
+
+    def schedule(self, key, ts, msg):
+        task = self.tasks.get(key)
+        if task is not None:
+            if task['ts'] > self.now() - 5000:
+                return
+            else:
+                task['ts'] = ts
+                task['msg'] = msg
+        else:
+            self.tasks[key] = {
+                'ts': ts,
+                'msg': msg,
+            }
+
+    def now(self):
+        return time.time() * 1000
+
+    def check_tasks(self):
+        cur = self.now()
+        done = []
+        for k, v in self.tasks.items():
+            if v['ts'] < cur:
+                self.write(v['msg'])
+                done.append(k)
+        for k in done:
+            self.tasks.pop(k)
 
     def is_triggered(self, key, item, x):
         if 'cmd' in item:
@@ -89,9 +124,9 @@ class Game:
             if k not in self.states:
                 self.states[k] = 0
             last = self.states[k]
-            if time.time() * 1000 - last < item['cd']:
+            if self.now() - last < item['cd']:
                 return False
-        self.states[key + '@@cd'] = time.time() * 1000
+        self.states[key + '@@cd'] = self.now()
         return True
 
     def check_cond(self, cond):
@@ -103,6 +138,8 @@ class Game:
             return cur > exp
         elif cond['op'] == 'lt':
             return cur < exp
+        elif cond['op'] == 'not':
+            return cur != exp
         else:
             return False
 
@@ -154,6 +191,7 @@ def console(input_line):
                 if len(x) > 0:
                     print(x)
                 game.check_triggers(x)
+                game.check_tasks()
                 if len(input_line.value) > 0:
                     if input_line.value[0] == ord('@'):
                         game.handle_cmd(input_line.value.decode(ENCODING))
@@ -162,7 +200,10 @@ def console(input_line):
                         tn.write(input_line.value + b'\r\n')
                     input_line.value = b''
             except Exception as e:
-                syslog("Caught exception: %s" % str(e))
+                msg = str(e)
+                syslog("Caught exception: %s" % msg)
+                if 'telnet connection closed' in msg:
+                    break
 
 if __name__ == '__main__':
     with Manager() as manager:
