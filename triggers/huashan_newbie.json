@@ -250,12 +250,491 @@
     },
     {
         "match": "近华山来了些新弟子，你带去练功房指点",
-        "out": "e;e;e",
+        "out": "e;e;e;zhidian student",
         "set": [
             {
                 "name": "hs-job",
                 "value": "ning"
             }
         ]
+    },
+    {
+        "match": "你开始指点",
+        "out": "zhidian student",
+        "delay": 3000
+    },
+    {
+        "match": "一招一式有板有眼，你可以回去和宁中则复命了",
+        "out": "w;w;w;ask ning about finish"
+    },
+    {
+        "match": "趁你不注意，一溜烟不知道跑到哪里去了",
+        "out": "w",
+        "delay": 3000,
+        "set": [
+            {
+                "name": "hs-zd-search",
+                "value": 1
+            }
+        ]
+    },
+    {
+        "and": [
+            {
+                "name": "hs-zd-search",
+                "op": "eq",
+                "value": 1
+            }
+        ],
+        "match": "这里是华山派的后花园，往日园中的花草全都不见了。北边是客厅，掌门人常在那里会客",
+        "out": "s",
+        "delay": 3000,
+        "set": [
+            {
+                "name": "hs-zd-search",
+                "value": 2
+            }
+        ]
+    },
+    {
+        "and": [
+            {
+                "name": "hs-zd-search",
+                "op": "eq",
+                "value": 2
+            }
+        ],
+        "match": "这里是华山弟子就餐的地方",
+        "out": "n;w;",
+        "delay": 3000,
+        "set": [
+            {
+                "name": "hs-zd-search",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "and": [
+            {
+                "name": "hs-zd-search",
+                "op": "eq",
+                "value": 3
+            }
+        ],
+        "match": "这里是华山派的后花园，往日园中的花草全都不见了。园中有个水井可以用来装水",
+        "out": "s",
+        "delay": 3000,
+        "set": [
+            {
+                "name": "hs-zd-search",
+                "value": 4
+            }
+        ]
+    },
+    {
+        "and": [
+            {
+                "name": "hs-zd-search",
+                "op": "eq",
+                "value": 4
+            }
+        ],
+        "match": "这里是华山弟子饮食起居的地方。靠墙一溜摆着几张木床，床上铺的是棉被。使人一看就想睡觉",
+        "out": "n;n",
+        "delay": 3000,
+        "set": [
+            {
+                "name": "hs-zd-search",
+                "value": 5
+            }
+        ]
+    },
+    {
+        "and": [
+            {
+                "name": "hs-zd-search",
+                "op": "eq",
+                "value": 5
+            }
+        ],
+        "match": "这里是岳不群的寝室",
+        "out": "s;w",
+        "delay": 3000,
+        "set": [
+            {
+                "name": "hs-zd-search",
+                "value": 6
+            }
+        ]
+    },
+    {
+        "and": [
+            {
+                "name": "hs-zd-search",
+                "op": "eq",
+                "value": 6
+            }
+        ],
+        "match": "岳不群的书房，平时岳先生在此会见熟人",
+        "out": "e;e;n",
+        "delay": 3000,
+        "set": [
+            {
+                "name": "hs-zd-search",
+                "value": 7
+            }
+        ]
+    },
+    {
+        "and": [
+            {
+                "name": "hs-zd-search",
+                "op": "eq",
+                "value": 7
+            }
+        ],
+        "match": "这是华山掌门岳不群的居所「有所不为轩」",
+        "out": "n",
+        "delay": 3000,
+        "set": [
+            {
+                "name": "hs-zd-search",
+                "value": 8
+            }
+        ]
+    },
+    {
+        "and": [
+            {
+                "name": "hs-zd-search",
+                "op": "eq",
+                "value": 8
+            }
+        ],
+        "match": "这里是华山派的练武场",
+        "out": "n",
+        "delay": 3000,
+        "set": [
+            {
+                "name": "hs-zd-search",
+                "value": 9
+            }
+        ]
+    },
+    {
+        "and": [
+            {
+                "name": "hs-zd-search",
+                "op": "eq",
+                "value": 9
+            }
+        ],
+        "match": "这里是华山的中峰，玉女峰",
+        "out": "e",
+        "delay": 3000,
+        "set": [
+            {
+                "name": "hs-zd-search",
+                "value": 10
+            }
+        ]
+    },
+    {
+        "and": [
+            {
+                "name": "hs-zd-search",
+                "op": "eq",
+                "value": 10
+            }
+        ],
+        "match": "玉女祠里供奉的到底是哪位玉女",
+        "out": "sd",
+        "delay": 3000,
+        "set": [
+            {
+                "name": "hs-zd-search",
+                "value": 11
+            }
+        ]
+    },
+    {
+        "and": [
+            {
+                "name": "hs-zd-search",
+                "op": "eq",
+                "value": 11
+            }
+        ],
+        "match": "这里是一条人迹罕至的小路，通向华山的后山",
+        "out": "sd",
+        "delay": 3000,
+        "set": [
+            {
+                "name": "hs-zd-search",
+                "value": 12
+            }
+        ]
+    },
+    {
+        "and": [
+            {
+                "name": "hs-zd-search",
+                "op": "eq",
+                "value": 12
+            }
+        ],
+        "match": "这里是一条人迹罕至的小路，通向华山的后山",
+        "out": "sd",
+        "delay": 3000,
+        "set": [
+            {
+                "name": "hs-zd-search",
+                "value": 13
+            }
+        ]
+    },
+    {
+        "and": [
+            {
+                "name": "hs-zd-search",
+                "op": "eq",
+                "value": 13
+            }
+        ],
+        "match": "这是一个小院，小院里花草树木也种了不少",
+        "out": "nu;nu;nu;w;nd",
+        "delay": 3000,
+        "set": [
+            {
+                "name": "hs-zd-search",
+                "value": 14
+            }
+        ]
+    },
+    {
+        "and": [
+            {
+                "name": "hs-zd-search",
+                "op": "eq",
+                "value": 14
+            }
+        ],
+        "match": "这里地势略为平坦，上、下山的游客多在此稍作休息再继续前行",
+        "out": "nu",
+        "delay": 3000,
+        "set": [
+            {
+                "name": "hs-zd-search",
+                "value": 15
+            }
+        ]
+    },
+    {
+        "and": [
+            {
+                "name": "hs-zd-search",
+                "op": "eq",
+                "value": 15
+            }
+        ],
+        "match": "华山五峰中最惊险的是北峰",
+        "out": "wu",
+        "delay": 3000,
+        "set": [
+            {
+                "name": "hs-zd-search",
+                "value": 16
+            }
+        ]
+    },
+    {
+        "and": [
+            {
+                "name": "hs-zd-search",
+                "op": "eq",
+                "value": 16
+            }
+        ],
+        "match": "这是一段极窄极险的山崖，四周云雾飞绕",
+        "out": "ed;nd",
+        "delay": 3000,
+        "set": [
+            {
+                "name": "hs-zd-search",
+                "value": 17
+            }
+        ]
+    },
+    {
+        "and": [
+            {
+                "name": "hs-zd-search",
+                "op": "eq",
+                "value": 17
+            }
+        ],
+        "match": "前面又是一处十分陡峭的山岭，上面有四只铁猿",
+        "out": "nd",
+        "delay": 3000,
+        "set": [
+            {
+                "name": "hs-zd-search",
+                "value": 18
+            }
+        ]
+    },
+    {
+        "and": [
+            {
+                "name": "hs-zd-search",
+                "op": "eq",
+                "value": 18
+            }
+        ],
+        "match": "爬过两个要命的悬崖，可在这里稍作歇息",
+        "out": "nu",
+        "delay": 3000,
+        "set": [
+            {
+                "name": "hs-zd-search",
+                "value": 19
+            }
+        ]
+    },
+    {
+        "and": [
+            {
+                "name": "hs-zd-search",
+                "op": "eq",
+                "value": 19
+            }
+        ],
+        "match": "这里就是华山别院所在",
+        "out": "sd;wd",
+        "delay": 3000,
+        "set": [
+            {
+                "name": "hs-zd-search",
+                "value": 20
+            }
+        ]
+    },
+    {
+        "and": [
+            {
+                "name": "hs-zd-search",
+                "op": "eq",
+                "value": 20
+            }
+        ],
+        "match": "走过千尺幢，前面又见另一要命的百尺峡",
+        "out": "nd",
+        "delay": 3000,
+        "set": [
+            {
+                "name": "hs-zd-search",
+                "value": 21
+            }
+        ]
+    },
+    {
+        "and": [
+            {
+                "name": "hs-zd-search",
+                "op": "eq",
+                "value": 21
+            }
+        ],
+        "match": "前面有一斜如天垂石梯的山阶，这就是赫赫有名的千尺幢",
+        "out": "wd",
+        "delay": 3000,
+        "set": [
+            {
+                "name": "hs-zd-search",
+                "value": 22
+            }
+        ]
+    },
+    {
+        "and": [
+            {
+                "name": "hs-zd-search",
+                "op": "eq",
+                "value": 22
+            }
+        ],
+        "match": "走过崎岖的十八盘，穿过云门，就到了青柯坪",
+        "out": "nd",
+        "delay": 3000,
+        "set": [
+            {
+                "name": "hs-zd-search",
+                "value": 23
+            }
+        ]
+    },
+    {
+        "and": [
+            {
+                "name": "hs-zd-search",
+                "op": "eq",
+                "value": 23
+            }
+        ],
+        "match": "沿着玉泉，踏过累累石涧，由山径迤逦而上",
+        "out": "nw",
+        "delay": 3000,
+        "set": [
+            {
+                "name": "hs-zd-search",
+                "value": 24
+            }
+        ]
+    },
+    {
+        "and": [
+            {
+                "name": "hs-zd-search",
+                "op": "eq",
+                "value": 24
+            }
+        ],
+        "match": "这里是华山脚下，南面就是素有",
+        "out": "n",
+        "delay": 3000,
+        "set": [
+            {
+                "name": "hs-zd-search",
+                "value": 25
+            }
+        ]
+    },
+    {
+        "match": "休息一会行不行啊",
+        "out": "ask student about 指点",
+        "delay": 3000
+    },
+    {
+        "match": "好吧，好吧，我回去还不行吗",
+        "out": ""
+    },
+    {
+        "match": "这些人了，你在江湖中，如果遇到这些前辈中的一个，代我向他问个好",
+        "out": ""
+    },
+    {
+        "match": "'s student",
+        "out": "ask student about 指点",
+        "set": [
+            {
+                "name": "hs-zd-search",
+                "value": 0
+            }
+        ]
+    },
+    {
+        "match": "这里是练功房，地下凌乱地放着几个蒲团",
+        "out": "zhidian student"
     }
 ]
