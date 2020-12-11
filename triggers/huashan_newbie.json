@@ -1,0 +1,86 @@
+[
+    {
+        "cd": 10000,
+        "out": "ask yue about job"
+    },
+    {
+        "match": "岳灵珊对你说道：最近华山颇不安宁，你带着这块令牌去巡逻一下吧。",
+        "out": "n"
+    },
+    {
+        "match": "你在练武场巡弋",
+        "out": "n"
+    },
+    {
+        "match": "你在玉女峰巡弋",
+        "out": "e"
+    },
+    {
+        "match": "你在玉女祠巡弋",
+        "out": "sd"
+    },
+    {
+        "match": "你在后山小路巡弋",
+        "out": "sd"
+    },
+    {
+        "match": "你在小院巡弋",
+        "out": "nu;nu;nu;w;nd"
+    },
+    {
+        "match": "你在镇岳宫巡弋",
+        "out": "eu"
+    },
+    {
+        "match": "你在朝阳峰巡弋",
+        "out": "wd;nu"
+    },
+    {
+        "match": "你在苍龙岭巡弋",
+        "out": "wu"
+    },
+    {
+        "match": "你在舍身崖巡弋",
+        "out": "ed;nd"
+    },
+    {
+        "match": "你在猢狲愁巡弋",
+        "out": "nd"
+    },
+    {
+        "match": "你在老君沟巡弋",
+        "out": "nu"
+    },
+    {
+        "match": "你在华山别院巡弋",
+        "out": "sd;wd"
+    },
+    {
+        "match": "你在百尺峡巡弋",
+        "out": "nd"
+    },
+    {
+        "match": "你在千尺幢巡弋",
+        "out": "wd"
+    },
+    {
+        "match": "你在青柯坪巡弋",
+        "out": "nd"
+    },
+    {
+        "match": "你在莎萝坪巡弋",
+        "out": "nw"
+    },
+    {
+        "match": "你在华山脚下巡弋",
+        "out": "n"
+    },
+    {
+        "match": "你在玉泉院巡弋",
+        "out": "s;se;su;eu;su;eu;su;su;sd;su;s;s;give yue ling"
+    },
+    {
+        "match": "这么快就回来了？肯定偷懒了吧",
+        "out": "give yue ling"
+    }
+]

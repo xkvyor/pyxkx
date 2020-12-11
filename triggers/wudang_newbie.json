@@ -1,0 +1,367 @@
+[
+    {
+        "match": "到达了目的地.*武当山.*，你从马车上走了下来",
+        "out": "n;wu;nu;nu;nu;w;nu;nu;eu;eu;nu;nu"
+    },
+    {
+        "cd": 10000,
+        "out": "ask chongxu about quest"
+    },
+    {
+        "match": "今天全派弟子要在.*?([\\u4e00-\\u9fff]+).*熟读典籍，据说要诵唱.*?([\\u4e00-\\u9fff]+.*」).*的.*?([\\u4e00-\\u9fff].*)",
+        "out":"ask chongxu about cancel"
+    },
+    {
+        "match": "家炼气最讲究时辰和地点了，现在正是采气的最佳时间。",
+        "out": "ask chongxu about cancel"
+    },
+    {
+        "match": "武当派以真武七截阵闻名天下，每个拜入武当的入门弟子都需要学习阵法演练",
+        "out": "w;zhenfa;",
+        "set": [{
+            "name": "newbie-task",
+            "value": 2
+        }]
+    },
+    {
+        "match": "现在教习太紧张了，演习阵法的教习都在使用中！请到广场上排队吧",
+        "out": "e;ask chongxu about quest"
+    },
+    {
+        "match": "房间中已经有人在演习阵法，请等对方演习结束再进去吧",
+        "out": "w;zhenfa"
+    },
+    {
+        "match": "行阵演练到此结束，大家走位都非常精确，看来以后有希望演练武当秘传的真武七截阵",
+        "out": "e;ask chongxu about 成功;",
+        "set": [
+            {
+                "name": "newbie-task",
+                "value": 0
+            }
+        ]
+    },
+    {
+        "match": "武当三侠最近迷上了炼丹，需要一个道童帮他看守丹炉",
+        "out": "n;n;n;n;e;e;ask yu about 炼丹;s;zuo;kan",
+        "set": [
+            {
+                "name": "newbie-task",
+                "value": 1
+            }
+        ]
+    },
+    {
+        "match": "我还没有开始炼丹呢，不要着急",
+        "out": "zhan;n;w;w;s;s;s;s;ask chongxu about quest;"
+    },
+    {
+        "match": "丹炉里传出来一阵清香，看来已经成丹了！赶紧向俞岱岩报告！",
+        "out": "zhan;n;ask yu about 炼丹;w;w;s;s;s;s;ask chongxu about 成功;"
+    },
+    {
+        "match": "冲虚道长说道：「你非常出色地完成了\\w+任务。」",
+        "set": [
+            {
+                "name": "newbie-task",
+                "value": 0
+            }
+        ]
+    },
+    {
+        "cmd": "aq",
+        "out": "ask chongxu about quest"
+    },
+    {
+        "match": "\\u001b\\[.*31m.*\\^.*\\^.*\\^.*\\^.*\\^",
+        "out": "change L"
+    },
+    {
+        "match": "\\u001b\\[.*35m.*\\^.*\\^.*\\^.*\\^.*\\^",
+        "out": "change M"
+    },
+    {
+        "match": "\\u001b\\[.*33m.*\\^.*\\^.*\\^.*\\^.*\\^",
+        "out": "change H"
+    },
+    {
+        "match": "清.*的要求.*走向.*木",
+        "set": [
+            {
+                "name": "zhenfa-mu",
+                "value": 1
+            }
+        ]
+    },
+    {
+        "match": "清.*的要求.*走向.*火",
+        "set": [
+            {
+                "name": "zhenfa-huo",
+                "value": 1
+            }
+        ]
+    },
+    {
+        "match": "清.*的要求.*走向.*水",
+        "set": [
+            {
+                "name": "zhenfa-shui",
+                "value": 1
+            }
+        ]
+    },
+    {
+        "match": "清.*的要求.*走向.*土",
+        "set": [
+            {
+                "name": "zhenfa-tu",
+                "value": 1
+            }
+        ]
+    },
+    {
+        "match": "清.*的要求.*走向.*金",
+        "set": [
+            {
+                "name": "zhenfa-jin",
+                "value": 1
+            }
+        ]
+    },
+    {
+        "and": [
+            {
+                "name": "zhenfa-jin",
+                "op": "eq",
+                "value": 1
+            },
+            {
+                "name": "zhenfa-mu",
+                "op": "eq",
+                "value": 1
+            },
+            {
+                "name": "zhenfa-shui",
+                "op": "eq",
+                "value": 1
+            },
+            {
+                "name": "zhenfa-huo",
+                "op": "eq",
+                "value": 1
+            }
+        ],
+        "out": "zouwei 土",
+        "set": [
+            {
+                "name": "zhenfa-jin",
+                "value": 0
+            },
+            {
+                "name": "zhenfa-mu",
+                "value": 0
+            },
+            {
+                "name": "zhenfa-shui",
+                "value": 0
+            },
+            {
+                "name": "zhenfa-huo",
+                "value": 0
+            },
+            {
+                "name": "zhenfa-tu",
+                "value": 0
+            }
+        ]
+    },
+    {
+        "and": [
+            {
+                "name": "zhenfa-tu",
+                "op": "eq",
+                "value": 1
+            },
+            {
+                "name": "zhenfa-mu",
+                "op": "eq",
+                "value": 1
+            },
+            {
+                "name": "zhenfa-shui",
+                "op": "eq",
+                "value": 1
+            },
+            {
+                "name": "zhenfa-huo",
+                "op": "eq",
+                "value": 1
+            }
+        ],
+        "out": "zouwei 金",
+        "set": [
+            {
+                "name": "zhenfa-jin",
+                "value": 0
+            },
+            {
+                "name": "zhenfa-mu",
+                "value": 0
+            },
+            {
+                "name": "zhenfa-shui",
+                "value": 0
+            },
+            {
+                "name": "zhenfa-huo",
+                "value": 0
+            },
+            {
+                "name": "zhenfa-tu",
+                "value": 0
+            }
+        ]
+    },
+    {
+        "and": [
+            {
+                "name": "zhenfa-jin",
+                "op": "eq",
+                "value": 1
+            },
+            {
+                "name": "zhenfa-mu",
+                "op": "eq",
+                "value": 1
+            },
+            {
+                "name": "zhenfa-tu",
+                "op": "eq",
+                "value": 1
+            },
+            {
+                "name": "zhenfa-huo",
+                "op": "eq",
+                "value": 1
+            }
+        ],
+        "out": "zouwei 水",
+        "set": [
+            {
+                "name": "zhenfa-jin",
+                "value": 0
+            },
+            {
+                "name": "zhenfa-mu",
+                "value": 0
+            },
+            {
+                "name": "zhenfa-shui",
+                "value": 0
+            },
+            {
+                "name": "zhenfa-huo",
+                "value": 0
+            },
+            {
+                "name": "zhenfa-tu",
+                "value": 0
+            }
+        ]
+    },
+    {
+        "and": [
+            {
+                "name": "zhenfa-jin",
+                "op": "eq",
+                "value": 1
+            },
+            {
+                "name": "zhenfa-mu",
+                "op": "eq",
+                "value": 1
+            },
+            {
+                "name": "zhenfa-shui",
+                "op": "eq",
+                "value": 1
+            },
+            {
+                "name": "zhenfa-tu",
+                "op": "eq",
+                "value": 1
+            }
+        ],
+        "out": "zouwei 火",
+        "set": [
+            {
+                "name": "zhenfa-jin",
+                "value": 0
+            },
+            {
+                "name": "zhenfa-mu",
+                "value": 0
+            },
+            {
+                "name": "zhenfa-shui",
+                "value": 0
+            },
+            {
+                "name": "zhenfa-huo",
+                "value": 0
+            },
+            {
+                "name": "zhenfa-tu",
+                "value": 0
+            }
+        ]
+    },
+    {
+        "and": [
+            {
+                "name": "zhenfa-jin",
+                "op": "eq",
+                "value": 1
+            },
+            {
+                "name": "zhenfa-tu",
+                "op": "eq",
+                "value": 1
+            },
+            {
+                "name": "zhenfa-shui",
+                "op": "eq",
+                "value": 1
+            },
+            {
+                "name": "zhenfa-huo",
+                "op": "eq",
+                "value": 1
+            }
+        ],
+        "out": "zouwei 木",
+        "set": [
+            {
+                "name": "zhenfa-jin",
+                "value": 0
+            },
+            {
+                "name": "zhenfa-mu",
+                "value": 0
+            },
+            {
+                "name": "zhenfa-shui",
+                "value": 0
+            },
+            {
+                "name": "zhenfa-huo",
+                "value": 0
+            },
+            {
+                "name": "zhenfa-tu",
+                "value": 0
+            }
+        ]
+    }
+]
