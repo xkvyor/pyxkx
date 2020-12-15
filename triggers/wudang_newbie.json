@@ -9,7 +9,33 @@
     },
     {
         "match": "今天全派弟子要在.*?([\\u4e00-\\u9fff]+).*熟读典籍，据说要诵唱.*?([\\u4e00-\\u9fff]+.*」).*的.*?([\\u4e00-\\u9fff].*)",
-        "out":"ask chongxu about cancel"
+        "out":"ask chongxu about cancel",
+        "set": [
+            {
+                "name": "wd-task-loc",
+                "value": "$1"
+            },
+            {
+                "name": "wd-task-book",
+                "value": "$2"
+            },
+            {
+                "name": "wd-task-chap",
+                "value": "$3"
+            },
+            {
+                "name": "wd-task-chap",
+                "value": "n;n;n;w;w;u;jie $2"
+            }
+        ]
+    },
+    {
+        "match": "用完典籍及时归还，如有遗失请过来登记",
+        "out": "give Jing to zhike",
+        "set": [{
+            "name": "wd-task-search",
+            "value": 1
+        }]
     },
     {
         "match": "家炼气最讲究时辰和地点了，现在正是采气的最佳时间。",

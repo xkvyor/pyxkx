@@ -174,7 +174,7 @@ class Game:
 
     def write(self, msg):
         self.last = msg
-        syslog("[trigger] %s" % msg)
+        syslog("[input] %s" % msg)
         cmds = msg.split(';')
         msg = '\r\n'.join(cmds)
         self.client.write(bytes(msg, encoding=ENCODING) + b'\r\n')
@@ -193,12 +193,12 @@ def console(input_line):
                 game.check_triggers(x)
                 game.check_tasks()
                 if len(input_line.value) > 0:
-                    if input_line.value[0] == ord('@'):
-                        game.handle_cmd(input_line.value.decode(ENCODING))
+                    line = input_line.value
+                    input_line.value = ''
+                    if line[0] == '@':
+                        game.handle_cmd(line)
                     else:
-                        syslog("[input] %s" % input_line.value)
-                        tn.write(input_line.value + b'\r\n')
-                    input_line.value = b''
+                        game.write(line)
             except Exception as e:
                 msg = str(e)
                 syslog("Caught exception: %s" % msg)
@@ -217,4 +217,4 @@ if __name__ == '__main__':
                 syslog('exit ...')
                 exit()
             else:
-                input_line.value = bytes(cmd, encoding=ENCODING)
+                input_line.value = cmd
